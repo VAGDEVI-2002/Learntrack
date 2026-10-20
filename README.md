@@ -128,7 +128,7 @@ classDiagram
     class CourseService {
         -ArrayList~Course~ courses
         +addCourse(courseName, description, duration) Course
-        +listCourses() ArrayList~Course~
+        +listCourses() List~Course~
         +findCourseById(id) Course
         +activateCourse(id)
         +deactivateCourse(id)

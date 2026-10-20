@@ -5,7 +5,6 @@ import com.airtribe.learntrack.exception.InvalidInputException;
 import com.airtribe.learntrack.service.*;
 import com.airtribe.learntrack.util.InputValidations;   // [Claude] Added - email validation now happens in the UI
 
-import java.util.ArrayList;
 import java.util.List;   // [Claude] Added
 import java.util.Scanner;
 
@@ -209,9 +208,9 @@ public class Main {
         String desc = sc.nextLine().trim();
         InputValidations.checkNoEmpty(desc);
         double dur = readDouble(sc, "Enter the duration (in weeks): ");   // [Claude] Replaced sc.nextDouble()
-        if(dur<=0)
+        if(Double.isNaN(dur) || Double.isInfinite(dur) || dur<=0)
         {
-            throw new InvalidInputException("Duration must be greater than 0.");
+            throw new InvalidInputException("Duration must be a valid number greater than 0.");
         }
 
         Course course = courseService.addCourse(cname,desc,dur);
@@ -220,7 +219,7 @@ public class Main {
 
     public static void viewAllCourses(CourseService courseService)
     {
-        ArrayList<Course> courses = courseService.listCourses();
+        List<Course> courses = courseService.listCourses();
         // [Claude] Added: actually print the courses
         if(courses.isEmpty())
         {

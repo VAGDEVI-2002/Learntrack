@@ -84,6 +84,10 @@ public class EnrollmentService {
 // ====================Mark Enrollment Completed / Cancelled============================
     public void updateStatus(int enrollmentId, EnrollmentStatus status) throws EntityNotFoundException, InvalidInputException
     {
+        if(status != EnrollmentStatus.COMPLETED && status != EnrollmentStatus.CANCELLED)
+        {
+            throw new InvalidInputException("Enrollment can only be marked as COMPLETED or CANCELLED");
+        }
         Enrollment enrollment = findEnrollmentById(enrollmentId);
         if(enrollment.getStatus() != EnrollmentStatus.ACTIVE)
         {

@@ -4,7 +4,8 @@ import com.airtribe.learntrack.exception.InvalidInputException;
 public class InputValidations {
     public static boolean validateEmail(String email)
     {
-        return email != null && email.contains("@") && email.contains(".");
+        // text before '@', and a domain like "example.com" after it (no spaces, no empty parts)
+        return email != null && email.matches("[^@\\s]+@[^@\\s.]+(\\.[^@\\s.]+)+");
     }
 
     public static void checkNoEmpty(String str) throws InvalidInputException

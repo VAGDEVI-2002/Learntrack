@@ -5,6 +5,8 @@ import com.airtribe.learntrack.exception.EntityNotFoundException;   // [Claude] 
 import com.airtribe.learntrack.util.IdGenerator;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class CourseService {
     private final ArrayList<Course> courses = new ArrayList<>();
@@ -16,9 +18,9 @@ public class CourseService {
         return course;
     }
 
-    public ArrayList<Course> listCourses()
+    public List<Course> listCourses()
     {
-        return courses;
+        return Collections.unmodifiableList(courses);   // read-only view, so callers can't add/remove courses directly
     }
 
     // [Claude] Added: search a course by id, reused by activate/deactivate

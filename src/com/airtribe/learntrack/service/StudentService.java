@@ -25,7 +25,7 @@ public class StudentService {
 //   ======================List all students=======================
     public List<Student> listStudents()
     {
-        return students;
+        return Collections.unmodifiableList(students);   // read-only view, so callers can't add/remove students directly
     }
 
 // =========================Search a student===============================
